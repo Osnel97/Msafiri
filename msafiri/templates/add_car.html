@@ -1,0 +1,163 @@
+{% load static %}
+{% include 'head.html' %}
+<body>
+
+  <nav class="navbar navbar-expand-md   shadow">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav">
+      <li class="nav-item">
+          <a class="nav-link" href="../">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../routes/">Routes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../add_route/">Add route</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../add_region/">Add region</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../add_company/">Add company</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="">Add car</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../about_us/">About us</a>
+        </li>    
+      </ul>
+    </div>  
+  </nav>
+  <br>
+  
+ <div class="container">
+   <div class='row'>
+     <div class="col-sm-3">
+ <h4 style="text-align:center">Add Car</h4>
+ <form method="POST" action="insert_car/" class='gy-2 gx-3 align-items-canter'>
+ {% csrf_token %}
+ <div class="col-auto">
+ <label for="car">Car Model:</label>
+     <input type="text" name="car_model"  placeholder="eg. YUTONG, MARCOPOLO" value="" class="form-control"></input>
+     <span class="error"></span>
+</div>
+<div class="col-auto">
+        <label for="car-property">Car luxury type:</label>
+        <select name="cars_luxury_type" id="cars" value="" class="form-select">
+         <option value="Luxury">Luxury</option>
+         <option value="Semi Luxury">Semi Luxury</option>
+         <option value="Luxury">normal</option>
+        </select>
+        <span class="error"></span>
+</div>
+<div class="col-auto">
+        <label for="company-name">Company name:</label>
+        <select name="cars_company_name" id="cars" value="" class="form-select">
+          {% for x in companies %}
+          <option value="{{x.companies_name}}">{{x.companies_name}}</option>
+          {% endfor %}
+         </select>
+        <span class="error"></span>
+</div>
+<div class="col-auto">
+        <label for="car-route">Route name:</label>
+        <select name="cars_route_name" id="cars" value="" class="form-select">
+          {% for x in routes %}
+          <option value="{{x.routes_name}}">{{x.routes_name}}</option>
+          {% endfor %}
+         </select>
+        <span class="error"></span>
+</div>
+<div class="col-auto">
+        <label for="jdate" >Journey Date:</label>
+        <input type="date" name="cars_date_of_journey"  placeholder="Choose Date" value="" class="form-control">
+        <span class="error"></span>
+</div>
+<div class="col-auto">
+        <label for="plate-no">Plate no:</label>
+ <input type="text" name="cars_plate_no"  placeholder="Enter Car plate number"  value="" class="form-control"></input>
+ <span class="error"></span>
+</div>
+
+ <div class="row">
+ <div class="col-sm-6"> 
+ <label for="departure-time">Departure time:</label>
+ <input type="text"  name="cars_departure_time"   value="" class="form-control time"></input>
+ <span class="error"></span>
+ </div>
+ <div class="col-sm-6">
+ <label for="destination-time">Destination time:</label>
+ <input type="text" name="cars_destination_time"  value="" class="form-control time" ></input>
+ <span class="error"></span>
+</div>
+</div>
+<br>
+
+<div class="col-auto">
+<button type="submit" name="add-car" class="btn btn-primary">Add</button>
+</div>
+</form>
+</div>
+
+<div class="col-sm-9">
+  <table id='routes' class="table table-hover">
+    <tr>
+      <th>S/N.</th>
+      <th>Car model.</th>
+      <th>Car Company.</th>
+      <th>Luxury type.</th>
+      <th>Car route.</th>
+      <th>plate no.</th>
+      <th>Date of journey.</th>
+      <th>Departure time.</th>
+      <th>destination time.</th>
+      <th>Date created.</th>
+      <th>Edit.</th>
+      <th>Delete.</th>
+    </tr>
+    <tbody>
+        {% for x in cars %}
+      <tr class=''>
+      <td><label>{{forloop.counter}}</label></td>
+      <td><label>{{x.cars_model}}</label></td>
+      <td><label>{{x.cars_company_name}}</label></td>
+      <td><label>{{x.cars_luxury_type}}</label></td>
+      <td><label>{{x.cars_route_name}}</label></td>
+      <td><label>{{x.cars_plate_no}}</label></td>
+      <td><label>{{x.cars_date_of_journey}}</label></td>
+      <td><label>{{x.cars_departure_time   | date:'H:i:s'}}</label></td>
+      <td><label>{{x.cars_destination_time | date:'H:i:s'}}</label></td>
+      <td><label>{{x.cars_created_time}}</label></td>
+      <td><label><button type='submit' class='btn btn-primary'><i class="fa-regular fa-pen-to-square"></i></button></label></td>
+      <td><label><a href="delete_car/{{x.id}}" class='btn btn-danger'><i class="fa-regular fa-trash-can"></i></a></label></td>
+     </tr>
+     {% endfor %}
+    </tbody>
+  </table>
+</div>
+</div>
+
+</div>
+
+<script src="{% static 'jquery-3.6/jquery-3.6.js' %}"></script>
+<script src="{% static 'jquery-3.6/jquery.timepicker.min.js' %}"></script>
+<script>
+  $(document).ready(function(){  
+   // $('#test').html('changed');
+      $('.time').timepicker({  
+          timeFormat: 'hh:mm:ss',  
+          interval: 1,  
+          minTime: '12:00am',  
+          maxTime: '12:01pm',  
+          startTime: '12:00am',  
+          defaultTime: '12:00am'  
+      });  
+  });  
+</script>
+</body>
+</html>

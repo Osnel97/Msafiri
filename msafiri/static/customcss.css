@@ -1,0 +1,89 @@
+  .navbar {
+    overflow: hidden;
+    background-color:#fffffff6;
+  }
+  h3{
+    font-family: "Lucida Console", "Courier New", monospace;
+    text-align: center;
+  }
+  .navbar a {
+    float: right;
+    display: block;
+    color: #000000;
+    text-align: center;
+    padding: 14px 16px;
+    font-size: 17px;
+  }
+  
+  .navbar ul li a:hover {
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+  }
+  
+  .navbar-toggler-icon {
+    display: none;
+  }
+  
+ 
+  
+  body {
+    font-family: sans-serif;
+  }
+
+
+
+  
+  /* On smaller screens, decrease text size */
+  @media only screen and (max-width: 300px) {
+    .text {font-size: 11px}
+  }
+  
+  #routes{
+      font-family: Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+      text-align: center;
+    }
+    
+    #routes td, #croutes th {
+     /*border: 1px solid #ddd;*/
+      padding: 8px;
+    }
+    
+    #routes tr:nth-child(even){background-color: #f2f2f2;}
+    
+    #book_btn :hover {background-color:rgb(255, 255, 255);
+    color:rgb(0, 0, 0);
+    }
+    
+    #routes th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: center;
+      background-color: rgb(255, 255, 255);
+      color: rgb(0, 0, 0);
+    }
+  
+    .collapsible {
+      background-color:  rgb(202, 202, 202);
+      color: white;
+      cursor: pointer;
+      padding: 18px;
+      width: 100%;
+      border: none;
+      text-align: left;
+      outline: none;
+      font-size: 15px;
+    }
+    
+    .active, .collapsible:hover {
+      background-color: rgb(255, 255, 255);
+      color:rgb(0, 0, 0);
+    }
+    
+    .content {
+      padding: 0 18px;
+      display: none;
+      overflow: hidden;
+      background-color: #ffffff;
+    }

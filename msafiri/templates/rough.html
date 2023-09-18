@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <!-- icons-->
+  <link href="{%  static 'fontawesome--6.1.1-web/css/all.css' %} " rel='stylesheet'>
+  <link href="{%  static 'jquery.timepicker.min.css' %} " rel='stylesheet'>
+  <title>Hello, world!</title>
+  <style>
+    
+  </style>
+  </head>
+  <body>
+    <div class="container" style="align-items: center;">
+    <h4 id="code">Hello</h4>
+    <i class="fa-solid fa-code" style="font-size:10rem; color:green;" ></i><br>
+    <input type='text' placeholder="fill_time" id="time"><br>
+    <div class="'time"></div>
+    <div style="background-image: url('static/photos/index_bg.jpeg'); background-size: 100% auto; height: 300px; width:  100%;" class=" d-flex justify-content-center align-items-center" id="img">
+        <div class="">
+           <button class="btn btn-outline-primary"> Nenga mmbwa</button>
+           <button class="btn btn-outline-primary"> Nenga paka</button>
+        </div> 
+    </div>
+  <a href="add_customers/" > Add Customers</a>
+  <form action="" method="post" class="center">
+    {% csrf_token %}
+    First Name:<br>
+    <input name="fname" class="form-control">
+    <br>
+    Last Name:<br>
+    <input name="lname" class="form-control">
+    <br>
+    <input type="submit" value="Add" class="btn btn-primary">
+    </form>
+  <h4>Customers list.</h4>
+<table class="" >
+{% for x in mycustomers %}
+<tr>
+<td>{{ x.id }}</td>
+<td>{{ x.firstname }}</td>
+<td>{{ x.lastname }}</td>
+</tr>
+{% endfor %}
+</table>
+</div>
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    -->
+    
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+ 
+ <script src="{%  static  'jquery-3.6.0.min.js' %}"></script>
+ <script src="{%  static  'jquery.timepicker.min.js' %}"></script>
+ <script>
+    $(document).ready(function(){  
+      $('#code').html('changed');
+        $('#time').timepicker({  
+            timeFormat: 'hh:mm:ss',  
+            interval: 1,  
+            minTime: '10',  
+            maxTime: '6:00pm',  
+            startTime: '10:00',  
+            defaultTime: '11'  
+        });  
+    });  
+ </script>
+  </body>
+</html>

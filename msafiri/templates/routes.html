@@ -1,0 +1,182 @@
+{% include 'head.html' %}
+<body>
+
+  <nav class="navbar navbar-expand-md   shadow">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav">
+      <li class="nav-item">
+          <a class="nav-link" href="../">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="">Routes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../add_route/">Add route</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../add_region/">Add region</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../add_company">Add company</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../add_car/">Add car</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../about_us/">About us</a>
+        </li>    
+      </ul>
+    </div>  
+  </nav>
+  <br>
+<div class='container' >
+  <div class='row'>
+  <div class='col-sm-3'>
+    <h4 style="text-align:center">Modify Search</h4>
+    <div class='col-auto'>
+      <form  class="" method="GET" action=''>
+          <label for="from" class="col-form-label">From:</label>
+          <div class='col-auto'>          
+          <select name="route_from" id="route_from"  class="form-select" required>
+            <option value="">Choose from</option>
+            {% for x in regions %}
+            <option value="{{x.regions_name}}">{{x.regions_name}}</option>
+            {% endfor %}
+           </select>
+          </div>
+  </div>
+  <div class="col-auto" >
+          <label for="route_to" class="col-form-label">To:</label>
+          <select name="route_to" id="route_to"  class="form-select" required>
+            <option value="">Choose from</option>
+            {% for x in regions %}
+            <option value="{{x.regions_name}}">{{x.regions_name}}</option>
+            {% endfor %}
+           </select>
+  </div>
+  <div class="col-auto">
+          <label for="date" class="col-form-label">Date:</label>
+          <input type="date" name="route_date"  placeholder="Choose Date" id='route_date' class="mb-2 mr-sm-2 form-control" required>
+  </div>
+  <div class="col-auto">
+          <button type="submit" class="btn btn-primary"  id='search_btn'  onclick='find_buses()' >Search buses</button>
+  </div>
+      </form> 
+  
+  </div>
+
+  <div class='col-sm-9'>
+    <h4 style="text-align:center">Available buses on your route.</h4><br>
+    <div style='padding:8px'>
+      <label for='Route ' ><b>Route: {{ route }}</b></label><br>
+      <label for='date'   ><b>Date:  {{ date }}</b></label>
+      <p style="text-align:center;color: red;"><b>{{no_route}}</b></p><br>
+  </div>
+  <br>
+    {% for x in cars %}
+    <div class='shadow'>
+        <table id='routes'>
+        <tr style='background-color:white;color:blue;'>
+          <th>Company Name</th>
+          <th>Car type</th>
+          <th>Departure time</th>
+          <th>Destination time</th>
+          <th>Price</th>
+        </tr>
+        <tbody>
+        <tr class='.table-striped'>
+          <td><label>{{x.cars_company_name}}</label></td>
+          <td><label>{{x.cars_luxury_type}}</label></td>
+          <td><label>{{x.cars_departure_time   | date:'H:i:s' }}</label></td>
+          <td><label>{{x.cars_destination_time | date:'H:i:s' }}</label></td>
+          <td><label>25000/=</label></td>
+          </tr>
+        </tbody>
+      </table>
+      <button type='button' class='collapsible' style='font-size:18px;width:100%;text-align:center;color:rgb(0, 0, 0);background-color:rgb(255, 255, 255);' id='book_btn'><b>Buy ticket</b></button>
+      <div class='content'>
+        <div class='row' style="border-top: 1px silver solid;">
+        <div class='col-sm-3' style="border-right: 1px silver solid;">
+          <h4>Select seat </h4> 
+          <div class="row">
+          <div class="col-sm-6"> 
+            <div class="row">
+              <div class="col-sm-6"><i class='fa-solid fa-chair' style="color: blue;"></i></div>
+              <div class="col-sm-6"><i class='fa-solid fa-chair' style="color: blue;"></i></div>
+            </div>     
+          </div>
+          <div class="col-sm-6">
+            <div class="row">
+              <div class="col-sm-6"><i class='fa-solid fa-chair' style="color: blue;"></i></div>
+              <div class="col-sm-6"><i class='fa-solid fa-chair' style="color: blue;"></i></div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6"> 
+            <div class="row">
+              <div class="col-sm-6"><i class='fa-solid fa-chair' style="color: blue;"></i></div>
+              <div class="col-sm-6"><i class='fa-solid fa-chair' style="color: blue;"></i></div>
+            </div>     
+          </div>
+          <div class="col-sm-6">
+            <div class="row">
+              <div class="col-sm-6"><i class='fa-solid fa-chair' style="color: blue;"></i></div>
+              <div class="col-sm-6"><i class='fa-solid fa-chair' style="color: blue;"></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+        <div  class='col-sm-3' style="border-right: 1px silver solid;">
+          <h4>Available seats</h4>   
+        </div>
+        <div  class='col-sm-3' style="border-right: 1px silver solid;">
+          <h4>Booked seats</h4>
+        </div>
+          <div class='col-sm-3' >
+          <h4>Enter Seat number</h4>
+          <form method='POST' action='book_ticket/'>
+            <div class="col-sm-5">
+          <input type='text' name='seat' class="form-control" width="50%"></input><br>
+          <button type='submit' name='seat-selector' class="btn btn-primary">Continue</button><br><br>
+        </div>
+        </form>
+        </div>  
+         </div> 
+        </div>
+        </div>
+        <br>
+    {% endfor %}
+</div>
+</div>
+</div>
+<script>
+
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+
+
+$(document).ready(function(){
+  search_route();
+});
+    
+</script>
+</body>
+</html>
+
